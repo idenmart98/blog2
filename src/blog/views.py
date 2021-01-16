@@ -51,6 +51,9 @@ def post_list(request):
 
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
+    if request.method == 'POST':
+        Post.objects.filter(id =post_id).delete()
+        return redirect('blog:post_list')
     return render(request,'post_detail.html',{'post':post})
 
 def tag_detail(request, tag_id):

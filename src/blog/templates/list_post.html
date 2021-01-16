@@ -1,6 +1,7 @@
 {% extends 'base.html'%}
 {% block content %}
 {% for post in posts%}
+    <br>
     <div class="card" style="width: 18rem;">
         <div class="card-body">
         <h5 class="card-title">{{post.title}}</h5>
@@ -9,7 +10,12 @@
         <a href="{% url 'blog:tag_detail'  tag_id=tag.id %}" class="card-link">{{tag.name}}</a>
         {% endfor %}
         <br>
-        <a href="{% url 'blog:post_detail'  post_id=post.id %}" class="btn btn-primary">Детальная</a>
+        <a href="{% url 'blog:post_detail'  post_id=post.id %}" class="btn btn-primary">Детальная</a><br>
+        <br>
+        <form action="{% url 'blog:post_detail'  post_id=post.id %}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="Удалить">
+        </form>
         </div>
     </div>
 {% endfor %}
