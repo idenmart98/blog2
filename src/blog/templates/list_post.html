@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+{% block content %}
+{% for post in posts%}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+        {% for tag in post.tags.all %}
+        <a href="{% url 'blog:tag_detail'  tag_id=tag.id %}" class="card-link">{{tag.name}}</a>
+        {% endfor %}
+        <br>
+        <a href="{% url 'blog:post_detail'  post_id=post.id %}" class="btn btn-primary">Детальная</a>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
+    
